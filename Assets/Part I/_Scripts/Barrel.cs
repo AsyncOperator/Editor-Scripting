@@ -2,9 +2,26 @@ using UnityEngine;
 
 [ExecuteAlways]
 public sealed class Barrel : MonoBehaviour {
+    private static readonly int prop_color_id = Shader.PropertyToID( "_Color" );
+
     [Range( 1f, 10f ), SerializeField] private float radius;
     [SerializeField] private float damage;
     [SerializeField] private Color color;
+
+    private MaterialPropertyBlock mpb; // Gonna be null on each assembly reload
+    public MaterialPropertyBlock Mpb {
+        get
+        {
+            if ( mpb == null )
+                mpb = new MaterialPropertyBlock();
+            return mpb;
+        }
+    }
+
+    /// <summary> Called everytime you modify a value in the inspector </summary>
+    private void OnValidate() {
+        ApplyColor();
+    }
 
     private void Awake() {
         /*
@@ -26,6 +43,12 @@ public sealed class Barrel : MonoBehaviour {
 
     private void OnDisable() {
         BarrelManager.RemoveFromList( this );
+    }
+
+    private void ApplyColor() {
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        Mpb.SetColor( prop_color_id, color );
+        meshRenderer.SetPropertyBlock( Mpb );
     }
 
     private void OnDrawGizmos() {
