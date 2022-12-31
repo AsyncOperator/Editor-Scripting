@@ -16,7 +16,7 @@ public sealed class BarrelManager : MonoBehaviour {
             foreach ( Barrel barrel in barrels ) {
                 //Gizmos.DrawLine( transform.position, barrel.transform.position );
 
-                // Some sort of equivalent
+                // Drawing anti-aliasing line nothing to fancy, some sort of equivalent of Gizmos.DrawLine
 #if UNITY_EDITOR
                 Handles.DrawAAPolyLine( transform.position, barrel.transform.position );
 #endif
