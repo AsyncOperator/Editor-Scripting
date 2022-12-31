@@ -4,9 +4,7 @@ using UnityEngine;
 public sealed class Barrel : MonoBehaviour {
     private static readonly int prop_color_id = Shader.PropertyToID( "_Color" );
 
-    [Range( 1f, 10f ), SerializeField] private float radius;
-    [SerializeField] private float damage;
-    [SerializeField] private Color color;
+    [SerializeField] private BarrelDataSO barrelDataSo;
 
     private MaterialPropertyBlock mpb; // Gonna be null on each assembly reload
     public MaterialPropertyBlock Mpb {
@@ -19,9 +17,7 @@ public sealed class Barrel : MonoBehaviour {
     }
 
     /// <summary> Called everytime you modify a value in the inspector </summary>
-    private void OnValidate() {
-        ApplyColor();
-    }
+    private void OnValidate() => TryApplyColor();
 
     private void Awake() {
         /*
@@ -45,13 +41,19 @@ public sealed class Barrel : MonoBehaviour {
         BarrelManager.RemoveFromList( this );
     }
 
-    private void ApplyColor() {
+    private void TryApplyColor() {
+        if ( barrelDataSo == null )
+            return;
+
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-        Mpb.SetColor( prop_color_id, color );
+        Mpb.SetColor( prop_color_id, barrelDataSo.Color );
         meshRenderer.SetPropertyBlock( Mpb );
     }
 
     private void OnDrawGizmos() {
-        Gizmos.DrawWireSphere( transform.position, radius );
+        if ( barrelDataSo == null )
+            return;
+
+        Gizmos.DrawWireSphere( transform.position, barrelDataSo.Radius );
     }
 }
