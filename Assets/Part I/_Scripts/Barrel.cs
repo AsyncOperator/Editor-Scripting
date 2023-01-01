@@ -41,6 +41,8 @@ public sealed class Barrel : MonoBehaviour {
         BarrelManager.RemoveFromList( this );
     }
 
+    // This gonna be in the context menu of this component
+    [ContextMenu( "Try Apply Color" )]
     public void TryApplyColor() {
         if ( barrelDataSo == null )
             return;
