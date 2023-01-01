@@ -17,5 +17,5 @@ public static class Snapper {
     [MenuItem( "Edit/Snap Selected Objects %&G", isValidateFunction: true )]
     public static bool SnapGameObjectsValidate() => Selection.gameObjects.Length > 0; // Greyed out when no objects selected so, so nothing can be snapped
 
-    private static Vector3 Round( this Vector3 v ) => new( Mathf.Round( v.x ), Mathf.Round( v.y ), Mathf.Round( v.z ) );
+    public static Vector3 Round( this Vector3 v ) => new( Mathf.Round( v.x ), Mathf.Round( v.y ), Mathf.Round( v.z ) );
 }
