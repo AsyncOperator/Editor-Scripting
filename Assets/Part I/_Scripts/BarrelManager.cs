@@ -11,6 +11,14 @@ public sealed class BarrelManager : MonoBehaviour {
 
     public static void RemoveFromList( Barrel barrel ) => barrels.Remove( barrel );
 
+    public static void UpdateAllBarrelsColor() {
+        if ( barrels.Count > 0 ) {
+            foreach ( Barrel barrel in barrels ) {
+                barrel.TryApplyColor();
+            }
+        }
+    }
+
     private void OnDrawGizmos() {
         if ( barrels.Count > 0 ) {
             foreach ( Barrel barrel in barrels ) {

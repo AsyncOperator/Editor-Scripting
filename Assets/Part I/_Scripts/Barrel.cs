@@ -41,7 +41,7 @@ public sealed class Barrel : MonoBehaviour {
         BarrelManager.RemoveFromList( this );
     }
 
-    private void TryApplyColor() {
+    public void TryApplyColor() {
         if ( barrelDataSo == null )
             return;
 

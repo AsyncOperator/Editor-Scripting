@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 252aa0998ba05844e940d6d3bdf3943b, type: 3}
   m_Name: Green Barrel
   m_EditorClassIdentifier: 
-  <Radius>k__BackingField: 2
-  <Damage>k__BackingField: 10
-  <Color>k__BackingField: {r: 0, g: 1, b: 0, a: 1}
+  Radius: 2
+  Damage: 10
+  Color: {r: 0, g: 1, b: 0, a: 1}
